@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<form id="createDept">
+    <div class="row">
+        <div class="col-md-8">
+            <label>Code</label>
+            <input name="Code" />
+            <br />
+            <label>Name</label>
+            <input name="Name" />
+
+            <button id="saveBtn" type="button" class="btn btn-primary">Save</button>
+            <button type="reset" class="btn btn-danger">Cancel</button>
+        </div>
+    </div>
+
+
+</form>
+<script>
+
+    $("#saveBtn").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Create", "Department")',
+                data: $("#createDept").serialize()
+            })
+                .done(function (response) {
+                    console.log(response);
+                    window.location.href = '@Url.Action("Index", "Department")';
+                })
+                .fail(function (xmlHttpRequest, textStatus, errorThrown) {
+
+                });
+
+  });
+</script>
