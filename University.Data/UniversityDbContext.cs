@@ -15,6 +15,10 @@ namespace University.Data
             
         }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Course> Courses { get; set; }
+
+
+
 
         public static UniversityDbContext Create()
         {

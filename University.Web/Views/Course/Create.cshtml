@@ -1,0 +1,67 @@
+﻿@model University.Web.ViewModels.CourseViewmodelsCreate
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<form id="createCourse">
+    <div class="row">
+        <div class="col-md-8">
+            <label>Code</label>
+            <input name="Code" />
+            <br />
+            <label>Name</label>
+            <input name="Name" />
+            <br />
+            <label>Credit</label>
+            <input name="Credit" />
+            <br />
+            <label>Description</label>
+            <input name="Description" />
+            <div class="form-group">
+                <label>Department</label>
+                <select class="form-control" name="DeptId">
+                    @foreach (var dept in Model.departments)
+                    {
+                        <option value="@dept.Id">@dept.Name</option>
+                    }
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label>Semester</label>
+                @Html.EnumDropDownListFor(
+                 x => x.semester,
+                 "Select semester",
+                 new { @class = "form-control" })
+
+            </div>
+
+            <button id="saveBtn" type="button" class="btn btn-primary">Save</button>
+            <button type="reset" class="btn btn-danger">Cancel</button>
+        </div>
+    </div>
+
+
+</form>
+<script>
+
+    $("#saveBtn").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Create", "Course")',
+                data: $("#createCourse").serialize()
+            })
+                .done(function (response) {
+                    console.log(response);
+                    window.location.href = '@Url.Action("Index", "Course")';
+                })
+                .fail(function (xmlHttpRequest, textStatus, errorThrown) {
+
+                });
+
+  });
+</script>

@@ -39,5 +39,9 @@ namespace University.Service
             context.Departments.Add(dept);
             context.SaveChanges();
         }
+        public Department GetDepartbyId(int Id)
+        {
+            return context.Departments.Find(Id);
+        }
     }  
 }

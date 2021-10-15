@@ -1,0 +1,28 @@
+﻿@model University.Web.ViewModels.CoursListingViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View All Courses</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Code</td>
+            <td>Name</td>
+            <td>Semester</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model.courses)
+        {
+        <tr>
+            <td>@course.Code</td>
+            <td>@course.Name</td>
+            <td>@course.Semester</td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+
