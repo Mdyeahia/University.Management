@@ -1,0 +1,75 @@
+﻿@model University.Web.ViewModels.TeacherViewModelCreate
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Save Teacher</h2>
+
+<form id="createTeacher">
+    <div class="row">
+        <div class="col-md-8">
+
+            <label>Name</label>
+            <input name="Name" />
+            <br />
+            <label>Address</label>
+            <input name="Address" />
+            <br />
+            <label>Email</label>
+            <input name="Email" />
+            <br />
+            <label>Contact</label>
+            <input name="Contact" />
+            <br />
+            <div class="form-group">
+                <label>Department</label>
+                <select class="form-control" name="DeptId">
+                    @foreach (var dept in Model.departments)
+                    {
+                        <option value="@dept.Id">@dept.Name</option>
+                    }
+                </select>
+
+            </div>
+            <br />
+            <div class="form-group">
+                <label>Designation</label>
+                <select class="form-control" name="DesignId">
+                    @foreach (var design in Model.designations)
+                    {
+                        <option value="@design.Id">@design.Name</option>
+                    }
+                </select>
+
+            </div>
+            <br />
+            <label>Credit to be taken</label>
+            <input name="Credit" />
+            <br />
+            <button id="saveBtn" type="button" class="btn btn-primary">Save</button>
+            <button type="reset" class="btn btn-danger">Cancel</button>
+        </div>
+    </div>
+
+
+</form>
+<script>
+
+    $("#saveBtn").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Create", "Teacher")',
+                data: $("#createTeacher").serialize()
+            })
+                .done(function (response) {
+                    console.log(response);
+                    window.location.href = '@Url.Action("Index", "Teacher")';
+                })
+                .fail(function (xmlHttpRequest, textStatus, errorThrown) {
+
+                });
+
+  });
+</script>

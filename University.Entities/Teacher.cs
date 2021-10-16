@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,19 +14,12 @@ namespace University.Entities
         public string Address { get; set; }
         public string Email { get; set; }
         public string Contact { get; set; }
-        public int Credit
-        {
-            get { return Credit; }
-            set
-            {
-                if (value >= 0)
-                    Credit = value;
-                else
-                    Credit = 0;
-            }
-        }
 
-        public Department Department { get; set; }
-        public Designation Designation { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "Only positive number allowed")]
+        public int Credit { get; set; }
+      
+
+        public virtual Department Department { get; set; }
+        public virtual Designation Designation { get; set; }
     }
 }

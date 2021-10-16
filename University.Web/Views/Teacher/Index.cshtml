@@ -1,0 +1,37 @@
+﻿@model University.Web.ViewModels.TeacherListingViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View All Teacher</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Address</td>
+            <td>Email</td>
+            <td>Contact No.</td>
+            <td>Designation</td>
+            <td>Department</td>
+            <td>Credit to be taken </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var teacher in Model.teachers)
+        {
+        <tr>
+            <td>@teacher.Name</td>
+            <td>@teacher.Address</td>
+            <td>@teacher.Email</td>
+            <td>@teacher.Contact</td>
+            <td>@teacher.Designation.Name</td>
+            <td>@teacher.Department.Name</td>
+            <td>@teacher.Credit</td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+
+
