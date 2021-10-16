@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using University.Entities;
+using University.Entities.Code;
 
 namespace University.Data
 {
@@ -16,6 +17,8 @@ namespace University.Data
         }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Designation> Designations { get; set; }
 
 
 
