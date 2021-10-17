@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssignCourse.cs" />
     <Compile Include="BaseEntities.cs" />
     <Compile Include="Code\Designation.cs" />
     <Compile Include="Code\Enums.cs" />

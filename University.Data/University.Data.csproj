@@ -74,6 +74,22 @@
     <Compile Include="Migrations\202110160959055_TeacherModelDesignationAdded2.Designer.cs">
       <DependentUpon>202110160959055_TeacherModelDesignationAdded2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110171952047_AssignCourseAdded.cs" />
+    <Compile Include="Migrations\202110171952047_AssignCourseAdded.Designer.cs">
+      <DependentUpon>202110171952047_AssignCourseAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110171956478_AssignCourseAdded1.cs" />
+    <Compile Include="Migrations\202110171956478_AssignCourseAdded1.Designer.cs">
+      <DependentUpon>202110171956478_AssignCourseAdded1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110171957556_AssignCourseAdded2.cs" />
+    <Compile Include="Migrations\202110171957556_AssignCourseAdded2.Designer.cs">
+      <DependentUpon>202110171957556_AssignCourseAdded2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110171958491_AssignCourseAdded3.cs" />
+    <Compile Include="Migrations\202110171958491_AssignCourseAdded3.Designer.cs">
+      <DependentUpon>202110171958491_AssignCourseAdded3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UniversityDbContext.cs" />
@@ -106,6 +122,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110160959055_TeacherModelDesignationAdded2.resx">
       <DependentUpon>202110160959055_TeacherModelDesignationAdded2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110171952047_AssignCourseAdded.resx">
+      <DependentUpon>202110171952047_AssignCourseAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110171956478_AssignCourseAdded1.resx">
+      <DependentUpon>202110171956478_AssignCourseAdded1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110171957556_AssignCourseAdded2.resx">
+      <DependentUpon>202110171957556_AssignCourseAdded2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110171958491_AssignCourseAdded3.resx">
+      <DependentUpon>202110171958491_AssignCourseAdded3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
