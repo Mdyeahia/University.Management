@@ -27,9 +27,9 @@ namespace University.Web.ViewModels
     }
     public class AssignCourseFillterViewModel
     {
-        public List<Department> departments { get; set; }
+        public List<Department> departmentsList { get; set; }
         public List<Teacher> teachers { get; set; }
-        public List<Course> courses { get; set; }
+        public List<Course> coursesList { get; set; }
         public double CreditTaken { get; set; }
         public double CreditRemain { get; set; }
         public string CourseName { get; set; }

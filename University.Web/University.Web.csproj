@@ -251,6 +251,8 @@
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\AssignCourse\Create.cshtml" />
     <Content Include="Views\AssignCourse\Index.cshtml" />
+    <Content Include="Views\AssignCourse\CourseStatics.cshtml" />
+    <Content Include="Views\AssignCourse\CourseStaticsTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

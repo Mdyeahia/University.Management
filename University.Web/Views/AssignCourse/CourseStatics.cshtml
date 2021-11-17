@@ -1,0 +1,43 @@
+﻿@model University.Web.ViewModels.AssignCourseFillterViewModel
+
+
+<h2>
+    View Course Statics
+
+</h2>
+<br />
+<div>
+    <label class="control-label col-md-2">Department</label>
+
+    <div class="col-md-10">
+
+        <select class="form-control" name="DepartmentId" id="DepartmentId">
+
+            <option value="">Select Department</option>
+            @foreach (var aDepartment in Model.departmentsList)
+            {
+                <option value="@aDepartment.Id">@aDepartment.Name</option>
+            }
+
+        </select><label id="DeptErrorLabel" style="color: red;"></label>
+
+
+    </div>
+</div>
+<script>
+
+    $("#DepartmentId").change(function () {
+        $.ajax({
+            type: "get",
+            url: '@Url.Action("CourseStaticsTable","AssignCourse")',
+            data: {
+                deptId: $("#DepartmentId").val()
+            }
+        }).done(function (response) {
+            $("#CourseStaticsTable").html(response);
+        })
+            .fail(function (xmlHttpRequest, textStatus, errorThrown) {
+
+            });
+    });
+</script>

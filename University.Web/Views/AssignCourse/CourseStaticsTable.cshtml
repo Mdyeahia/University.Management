@@ -1,0 +1,34 @@
+﻿@model University.Web.ViewModels.AssignCourseFillterViewModel
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Code</td>
+            <td>Name/Title</td>
+            <td>Semester</td>
+            <td>Assigned To</td>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model.coursesList)
+        {
+        <tr>
+            <td>@course.Code</td>
+            <td>@course.Name</td>
+            <td>@course.Semester</td>
+            @if (course.CourseAssignTo != null)
+            {
+                <td>@course.CourseAssignTo</td>
+            }
+            else
+            {
+                 <td>Not Assigned Yet</td>
+            }
+
+
+        </tr>
+        }
+
+    </tbody>
+</table>

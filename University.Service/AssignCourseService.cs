@@ -37,6 +37,7 @@ namespace University.Service
             var value = assigncourse.CreditTaken;
             return value;
         }
+        
         public List<Teacher> GetTeacherbydeptId(int Id)
         {
             UniversityDbContext context = new UniversityDbContext();

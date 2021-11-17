@@ -14,7 +14,26 @@ namespace University.Web.Controllers
         // GET: AssignCourse
         public ActionResult Index()
         {
+
             return View();
+        }
+        [HttpGet]
+        public ActionResult CourseStatics()
+        {
+
+            AssignCourseFillterViewModel model = new AssignCourseFillterViewModel();
+            model.departmentsList = DepartmentService.Instance.AllDepartments();
+
+            return PartialView(model);
+        }
+    
+        public ActionResult CourseStaticsTable(int deptId)
+        {
+            AssignCourseFillterViewModel model = new AssignCourseFillterViewModel();
+            model.coursesList = CourseService.Instance.FilterCoursebyDeptId(deptId);
+            
+
+            return PartialView(model);
         }
 
         public ActionResult Create()
@@ -83,12 +102,16 @@ namespace University.Web.Controllers
 
                 AssignCourseService.Instance.SaveAssignCourse(assignCourse);
                 var teacher = TeacherService.Instance.GetTeacherById(assign.TeacherId);
+                var course = CourseService.Instance.GetCourseById(assign.CourseId);
                 if (teacher != null)
                 {
 
                     teacher.CreditRemain = assignCourse.CreditRemain;
-
                     TeacherService.Instance.UpdateTeacher(teacher);
+
+                    course.CourseAssignTo = teacher.Name;
+                    CourseService.Instance.UpdateCourse(course);
+
                 }
                 result.Data = new { success = true };
             }
@@ -98,6 +121,7 @@ namespace University.Web.Controllers
             }
             return result;
         }
+
         
     }
 }

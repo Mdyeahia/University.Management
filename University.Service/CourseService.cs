@@ -29,7 +29,7 @@ namespace University.Service
         #endregion
         UniversityDbContext context = new UniversityDbContext();
 
-        public List<Course> FilterCourse(int Id)
+        public List<Course> FilterCoursebyDeptId(int Id)
         {
             return context.Courses.Where(x => x.DepartmentId == Id).ToList();
         }
@@ -54,6 +54,12 @@ namespace University.Service
 
 
             context.Courses.Add(course);
+            context.SaveChanges();
+        }
+        public void UpdateCourse(Course course)
+        {
+
+            context.Entry(course).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
         }
         public Course GetCourseById(int Id)

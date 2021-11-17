@@ -33,5 +33,7 @@ namespace University.Entities
 
         [NotMapped]
         public virtual Semester Semester { get; set; }
+
+        public string CourseAssignTo { get; set; }
     }
 }
