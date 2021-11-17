@@ -41,7 +41,7 @@ namespace University.Web.Controllers
             newcourse.Credit = model.Credit;
             newcourse.Description = model.Description;
 
-            newcourse.Department = DepartmentService.Instance.GetDepartbyId(model.DeptId);
+            newcourse.DepartmentId = model.DeptId;
             newcourse.Semester = (Semester)Enum.Parse(typeof(Semester), model.semester.ToString());
 
             CourseService.Instance.SaveCourse(newcourse);

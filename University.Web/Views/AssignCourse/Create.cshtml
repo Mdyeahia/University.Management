@@ -1,0 +1,192 @@
+﻿@model University.Entities.AssignCourse
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<h2>
+    Course Assign to Teacher
+</h2>
+
+@using (Html.BeginForm())
+{
+    <form id="assignCourse">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="control-label col-md-2">Department</label>
+
+                    <div class="col-md-10">
+
+                        <select class="form-control" name="DepartmentId" id="DepartmentId">
+
+                            <option value="">Select Department</option>
+                            @foreach (var aDepartment in ViewBag.DepartmentList)
+                            {
+                                <option value="@aDepartment.Id">@aDepartment.Name</option>
+                            }
+
+                        </select><label id="DeptErrorLabel" style="color: red;"></label>
+
+
+                    </div>
+                </div>
+                <br />
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TeacherId, "Teacher", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select class="form-control" id="teacherId" name="teacherId">
+                            <option>Select Teacher</option>
+                        </select>
+                    </div>
+                </div>
+
+                <br />
+                <div class="form-group">
+                    <label class="control-label col-md-2">Credit to be taken</label>
+                    <div class="col-md-10">
+
+                        <input type="text" name="creditTaken" id="creditTaken" readonly="readonly" class="form-control" />
+
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label class="control-label col-md-2">Remaining credit</label>
+                    <div class="col-md-10">
+                        <input type="text" name="creditRemain" id="creditRemain" readonly="readonly" class="form-control" />
+
+                    </div>
+                </div>
+                <br />
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Course</label>
+                    <div class="col-md-10">
+                        <select class="form-control" name="courseId" id="courseId">
+                            <option value="">Select Course</option>
+
+                        </select>
+
+                    </div>
+                </div>
+
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" name="courseName" id="courseName" readonly="readonly" class="form-control" />
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CourseCredit, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" name="courseCredit" id="courseCredit" readonly="readonly" class="form-control" />
+                    </div>
+                </div>
+
+                <button id="saveBtn" type="button" class="btn btn-primary">Save</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
+
+
+    </form>
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#DepartmentId").change(function () {
+            var departmentId = $("#DepartmentId").val();
+            //var jasonData = { DeptId: departmentId };
+            $("#creditTaken").val("");
+            $("#creditRemain").val("");
+            $("#courseName").val("");
+            $("#courseCredit").val("");
+            $("#teacherId").empty();
+            $("#teacherId").append('<option>--Select Teacher--</option>');
+
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("TeacherByDepartmentId","AssignCourse")',
+                contentType: "application/json; charset=utf-8",
+                data: { DeptId: departmentId },
+                dataType: "json",
+
+                success: function (data) {
+
+                    $.each(data, function (key, value) {
+                        $("#teacherId").append('<option value=' + value.Id + '>' + value.Name + '</option>');
+
+                    });
+                },
+            });
+            $("#courseId").empty();
+            //var jasonData = { DeptId: departmentId };
+            $("#courseId").append('<option>--Select Course--</option>');
+
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("CourseByDepartmentId", "AssignCourse")',
+                contentType: "application/json; charset=utf-8",
+                data: { DeptId: departmentId },
+                dataType: "json",
+                success: function (courses) {
+
+                    $.each(courses, function (key, value) {
+                        $("#courseId").append('<option value=' + value.Id + '>' + value.Name + '</option>');
+                    });
+                },
+            });
+            return false;
+        });
+        $("#teacherId").change(function () {
+                var TeacherId = $("#teacherId").val();
+
+                $("#creditTaken").val("");
+                $("#creditRemain").val("");
+                $("#courseName").val("");
+                $("#courseCredit").val("");
+
+                $.ajax({
+                    type: "Get",
+                    url: '@Url.Action("GetTeacherById", "AssignCourse")',
+                    contentType: "application/json; charset=utf-8",
+                    data: { teacherId: TeacherId },
+                    dataType: "json",
+                    success: function (data) {
+
+                        $("#creditTaken").val(data.CreditTaken);
+
+                        $("#creditRemain").val(data.CreditRemain);
+
+                    }
+                });
+        });
+
+            $("#courseId").change(function() {
+                var courseId = $("#courseId").val();
+
+                $("#courseName").val("");
+                $("#courseCredit").val("");
+                $.ajax({
+                    type: "Get",
+                    url: '@Url.Action("GetCourseById", "AssignCourse")',
+                    contentType: "application/json; charset=utf-8",
+                    data: { CourseId: courseId },
+                    dataType: "json",
+                    success: function(data) {
+                        $("#courseName").val(data.Name);
+                        $("#courseCredit").val(data.Credit);
+                    }
+                });
+            });
+
+    });
+
+
+</script>

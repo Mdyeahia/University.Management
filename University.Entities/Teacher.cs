@@ -15,11 +15,16 @@ namespace University.Entities
         public string Email { get; set; }
         public string Contact { get; set; }
 
-        [Range(1, int.MaxValue, ErrorMessage = "Only positive number allowed")]
-        public int Credit { get; set; }
-      
+        [Range(1, double.MaxValue, ErrorMessage = "Only positive number allowed")]
+        [Display(Name = "Credit to be Taken")]
+        public double CreditTaken { get; set; }
+        public double CreditRemain { get; set; }
 
+
+        public int DepartmentId { get; set; }
         public virtual Department Department { get; set; }
+
+        public int DesignationId { get; set; }
         public virtual Designation Designation { get; set; }
     }
 }

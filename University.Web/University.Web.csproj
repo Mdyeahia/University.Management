@@ -182,6 +182,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AssignCourseViewModel.cs" />
     <Compile Include="ViewModels\CourseViewmodels.cs" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\TeacherViewModel.cs" />
@@ -248,10 +249,11 @@
     <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\Teacher\Create.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\AssignCourse\Create.cshtml" />
+    <Content Include="Views\AssignCourse\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AssignCourse\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

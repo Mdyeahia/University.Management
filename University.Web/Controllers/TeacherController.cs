@@ -36,9 +36,12 @@ namespace University.Web.Controllers
             newTeacher.Address = model.Address;
             newTeacher.Email = model.Email;
             newTeacher.Contact = model.Contact;
-            newTeacher.Credit = model.Credit;
-            newTeacher.Designation = CodeService.Instance.GetDesignById(model.DesignId);
-            newTeacher.Department = DepartmentService.Instance.GetDepartbyId(model.DeptId);
+            newTeacher.CreditTaken = model.Credit;
+
+            newTeacher.CreditRemain = model.Credit;
+
+            newTeacher.DesignationId = model.DesignId;
+            newTeacher.DepartmentId = model.DeptId;
 
             TeacherService.Instance.SaveTeacher(newTeacher);
 

@@ -28,6 +28,9 @@ namespace University.Service
 
         #endregion
         UniversityDbContext context = new UniversityDbContext();
+
+        
+
         public List<Department> AllDepartments()
         {
             return context.Departments.ToList();
@@ -43,5 +46,6 @@ namespace University.Service
         {
             return context.Departments.Find(Id);
         }
+       
     }  
 }

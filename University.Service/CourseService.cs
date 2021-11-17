@@ -28,6 +28,23 @@ namespace University.Service
 
         #endregion
         UniversityDbContext context = new UniversityDbContext();
+
+        public List<Course> FilterCourse(int Id)
+        {
+            return context.Courses.Where(x => x.DepartmentId == Id).ToList();
+        }
+        public string CourseName(string code)
+        {
+            var courseName = context.Courses.Where(x => x.Code == code).First();
+           
+            return courseName.Name; ;
+        }
+        public decimal CourseCredit(string code)
+        {
+            var courseName = context.Courses.Where(x => x.Code == code).First();
+            
+            return courseName.Credit;
+        }
         public List<Course> AllCourses()
         {
             return context.Courses.ToList();
@@ -38,6 +55,10 @@ namespace University.Service
 
             context.Courses.Add(course);
             context.SaveChanges();
+        }
+        public Course GetCourseById(int Id)
+        {
+            return context.Courses.Find(Id);
         }
     }
 }
