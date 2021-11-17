@@ -11,7 +11,7 @@ namespace University.Entities
         public string Code { get; set; }
         public string Name { get; set; }
 
-        public  List<Teacher> Teachers { get; set; }
-        public  List<Course> Courses { get; set; }
+        public virtual  List<Teacher> Teachers { get; set; }
+        public virtual  List<Course> Courses { get; set; }
     }
 }

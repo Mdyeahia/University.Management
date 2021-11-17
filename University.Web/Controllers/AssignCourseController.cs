@@ -25,23 +25,23 @@ namespace University.Web.Controllers
 
             return View();
         }
-        [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,DepartmentId,TeacherId,CreditTaken,CreditRemain,CourseId,CourseName,CourseCredit")] AssignCourse assignCourse)
-        {
-            if (ModelState.IsValid)
-            {
-                AssignCourseService.Instance.SaveAssignCourse(assignCourse);
-                
-                ViewBag.Message = "Course Assigned Successful";
+        //[HttpPost]
+        //public ActionResult Create([Bind(Include = "Id,DepartmentId,TeacherId,CreditTaken,CreditRemain,CourseId,CourseName,CourseCredit")] AssignCourse assignCourse)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        AssignCourseService.Instance.SaveAssignCourse(assignCourse);
 
-                //  return RedirectToAction("Index");
-            }
+        //        ViewBag.Message = "Course Assigned Successful";
 
-            ViewBag.CourseID = new SelectList(CourseService.Instance.AllCourses(), "Id", "Code", assignCourse.CourseId);
-            ViewBag.DepartmentId = new SelectList(DepartmentService.Instance.AllDepartments(), "Id", "Code", assignCourse.DepartmentId);
-            ViewBag.TeacherId = new SelectList(TeacherService.Instance.GetAllTeacher(), "Id", "Name", assignCourse.TeacherId);
-            return View(assignCourse);
-        }
+        //        //  return RedirectToAction("Index");
+        //    }
+
+        //    ViewBag.CourseID = new SelectList(CourseService.Instance.AllCourses(), "Id", "Code", assignCourse.CourseId);
+        //    ViewBag.DepartmentId = new SelectList(DepartmentService.Instance.AllDepartments(), "Id", "Code", assignCourse.DepartmentId);
+        //    ViewBag.TeacherId = new SelectList(TeacherService.Instance.GetAllTeacher(), "Id", "Name", assignCourse.TeacherId);
+        //    return View(assignCourse);
+        //}
         public JsonResult TeacherByDepartmentId(int? DeptId)
         {
             var teachers = AssignCourseService.Instance.GetTeacherbydeptId((int)DeptId);
@@ -65,32 +65,39 @@ namespace University.Web.Controllers
 
 
         [HttpPost]
-        public ActionResult Create(AssignCourseFillterViewModel model)
+        public JsonResult Create(AssignCourseViewModelCreate assign)
         {
+            JsonResult result = new JsonResult();
+
             if (ModelState.IsValid)
             {
                 var assignCourse = new AssignCourse();
 
-                assignCourse.DepartmentId = model.DepartmentId;
-                assignCourse.TeacherId = model.TeacherId;
-                assignCourse.CreditTaken = model.CreditTaken;
-                assignCourse.CreditRemain = model.CreditRemain;
-                assignCourse.Course = CourseService.Instance.GetCourseById(model.CourseId);
-                assignCourse.CourseName = model.CourseName;
-                assignCourse.CourseCredit = model.CourseCredit;
+                assignCourse.DepartmentId = assign.DepartmentId;
+                assignCourse.TeacherId = assign.TeacherId;
+                assignCourse.CreditTaken = assign.CreditTaken;
+                assignCourse.CreditRemain = assign.CreditRemain- assign.CourseCredit;
+                assignCourse.CourseId =assign.CourseId;
+                assignCourse.CourseName = assign.CourseName;
+                assignCourse.CourseCredit = assign.CourseCredit;
 
                 AssignCourseService.Instance.SaveAssignCourse(assignCourse);
-
-                if (assignCourse.Teacher != null)
+                var teacher = TeacherService.Instance.GetTeacherById(assign.TeacherId);
+                if (teacher != null)
                 {
-                    var teacher = TeacherService.Instance.GetTeacherById(assignCourse.TeacherId);
-                    teacher.CreditRemain = teacher.CreditTaken - assignCourse.CourseCredit;
+
+                    teacher.CreditRemain = assignCourse.CreditRemain;
 
                     TeacherService.Instance.UpdateTeacher(teacher);
                 }
+                result.Data = new { success = true };
             }
-
-            return RedirectToAction("Index");
+            else
+            {
+                result.Data = new { success = false, message = "Invalid update" };
+            }
+            return result;
         }
+        
     }
 }

@@ -1,4 +1,4 @@
-﻿@model University.Entities.AssignCourse
+﻿@model University.Web.ViewModels.AssignCourseViewModelCreate
 
 @{
     ViewBag.Title = "Create";
@@ -10,9 +10,9 @@
     Course Assign to Teacher
 </h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "AssignCourse", FormMethod.Post, new { @id = "assignCourse", @class = "form-horizontal", style = "padding-top:25px" }))
 {
-    <form id="assignCourse">
+    <form>
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -101,7 +101,7 @@
 
     $(document).ready(function () {
         $("#DepartmentId").change(function () {
-            var departmentId = $("#DepartmentId").val();
+        var departmentId = $("#DepartmentId").val();
             //var jasonData = { DeptId: departmentId };
             $("#creditTaken").val("");
             $("#creditRemain").val("");
@@ -111,26 +111,27 @@
             $("#teacherId").append('<option>--Select Teacher--</option>');
 
             $.ajax({
-                type: "Get",
+        type: "Get",
                 url: '@Url.Action("TeacherByDepartmentId","AssignCourse")',
                 contentType: "application/json; charset=utf-8",
                 data: { DeptId: departmentId },
                 dataType: "json",
 
                 success: function (data) {
-
+                    
                     $.each(data, function (key, value) {
+                        
                         $("#teacherId").append('<option value=' + value.Id + '>' + value.Name + '</option>');
 
-                    });
-                },
+                });
+            },
             });
             $("#courseId").empty();
             //var jasonData = { DeptId: departmentId };
             $("#courseId").append('<option>--Select Course--</option>');
 
             $.ajax({
-                type: "Get",
+        type: "Get",
                 url: '@Url.Action("CourseByDepartmentId", "AssignCourse")',
                 contentType: "application/json; charset=utf-8",
                 data: { DeptId: departmentId },
@@ -139,13 +140,13 @@
 
                     $.each(courses, function (key, value) {
                         $("#courseId").append('<option value=' + value.Id + '>' + value.Name + '</option>');
-                    });
-                },
+                });
+            },
             });
-            return false;
-        });
+        return false;
+    });
         $("#teacherId").change(function () {
-                var TeacherId = $("#teacherId").val();
+        var TeacherId = $("#teacherId").val();
 
                 $("#creditTaken").val("");
                 $("#creditRemain").val("");
@@ -153,7 +154,7 @@
                 $("#courseCredit").val("");
 
                 $.ajax({
-                    type: "Get",
+        type: "Get",
                     url: '@Url.Action("GetTeacherById", "AssignCourse")',
                     contentType: "application/json; charset=utf-8",
                     data: { teacherId: TeacherId },
@@ -163,18 +164,18 @@
                         $("#creditTaken").val(data.CreditTaken);
 
                         $("#creditRemain").val(data.CreditRemain);
-
-                    }
-                });
+                      
+            }
         });
+    });
 
-            $("#courseId").change(function() {
-                var courseId = $("#courseId").val();
+         $("#courseId").change(function() {
+        var courseId = $("#courseId").val();
 
                 $("#courseName").val("");
                 $("#courseCredit").val("");
                 $.ajax({
-                    type: "Get",
+        type: "Get",
                     url: '@Url.Action("GetCourseById", "AssignCourse")',
                     contentType: "application/json; charset=utf-8",
                     data: { CourseId: courseId },
@@ -182,11 +183,35 @@
                     success: function(data) {
                         $("#courseName").val(data.Name);
                         $("#courseCredit").val(data.Credit);
-                    }
-                });
-            });
+            }
+        });
+    });
+
+
+
+        $("#saveBtn").click(function () {
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Create", "AssignCourse")',
+                data:$("#assignCourse").serialize(),
+
+            }).done(function (response) {
+                
+                    if (response.success) {
+                        console.log("work");
+            }
+                     else {
+                            console.error("failllllllllll");
+            }
+
+        })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("FAIL");
+        });
 
     });
+});
 
 
 </script>

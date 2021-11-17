@@ -269,6 +269,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\University.Data\University.Data.csproj">
+      <Project>{762A2D69-12B4-4D2C-8692-2F316D993913}</Project>
+      <Name>University.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\University.Entities\University.Entities.csproj">
       <Project>{2623FB60-F989-4C26-80F6-3EE40DD4B26A}</Project>
       <Name>University.Entities</Name>

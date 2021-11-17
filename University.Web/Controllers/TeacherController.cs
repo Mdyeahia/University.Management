@@ -11,10 +11,12 @@ namespace University.Web.Controllers
 {
     public class TeacherController : Controller
     {
+        
         // GET: Teacher
         public ActionResult Index()
         {
             TeacherListingViewModel model = new TeacherListingViewModel();
+           
             model.teachers = TeacherService.Instance.GetAllTeacher();
             return View(model);
         }

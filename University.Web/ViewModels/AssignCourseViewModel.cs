@@ -12,7 +12,7 @@ namespace University.Web.ViewModels
         public Department Department { get; set; }
 
         public int TeacherId { get; set; }
-        public Teacher Teacher { get; set; }
+        public  Teacher Teacher { get; set; }
 
 
         public double CreditTaken { get; set; }
@@ -20,7 +20,7 @@ namespace University.Web.ViewModels
 
 
         public int CourseId { get; set; }
-        public Course Course { get; set; }
+        public  Course Course { get; set; }
 
         public string CourseName { get; set; }
         public double CourseCredit { get; set; }

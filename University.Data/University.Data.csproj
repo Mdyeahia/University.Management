@@ -110,6 +110,14 @@
     <Compile Include="Migrations\202111161229404_ModelDecimalToDouble.Designer.cs">
       <DependentUpon>202111161229404_ModelDecimalToDouble.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111170547485_ChangesOnModel.cs" />
+    <Compile Include="Migrations\202111170547485_ChangesOnModel.Designer.cs">
+      <DependentUpon>202111170547485_ChangesOnModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111170929000_ChangesOnModel1.cs" />
+    <Compile Include="Migrations\202111170929000_ChangesOnModel1.Designer.cs">
+      <DependentUpon>202111170929000_ChangesOnModel1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UniversityDbContext.cs" />
@@ -169,6 +177,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111161229404_ModelDecimalToDouble.resx">
       <DependentUpon>202111161229404_ModelDecimalToDouble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111170547485_ChangesOnModel.resx">
+      <DependentUpon>202111170547485_ChangesOnModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111170929000_ChangesOnModel1.resx">
+      <DependentUpon>202111170929000_ChangesOnModel1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

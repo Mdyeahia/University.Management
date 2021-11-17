@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using University.Data;
 using University.Entities;
+using System.Data.Entity;
 
 namespace University.Service
 {
@@ -53,7 +54,8 @@ namespace University.Service
         }
         public List<Teacher> GetAllTeacher()
         {
-            return context.Teachers.ToList();
+
+            return context.Teachers.Include(a=>a.Department).ToList();
         }
         public Teacher GetTeacherById(int Id)
         {

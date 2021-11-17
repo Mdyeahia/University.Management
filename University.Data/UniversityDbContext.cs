@@ -23,12 +23,13 @@ namespace University.Data
         public DbSet<AssignCourse> AssignCourses { get; set; }
 
 
-
+       
 
         public static UniversityDbContext Create()
         {
             return new UniversityDbContext();
         }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

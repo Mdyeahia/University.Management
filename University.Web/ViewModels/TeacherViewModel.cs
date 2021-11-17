@@ -25,6 +25,6 @@ namespace University.Web.ViewModels
     }
     public class TeacherListingViewModel
     {
-        public List<Teacher> teachers { get; set; }
+        public  List<Teacher> teachers { get; set; }
     }
 }
