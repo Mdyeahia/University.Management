@@ -21,6 +21,7 @@ namespace University.Data
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Designation> Designations { get; set; }
         public DbSet<AssignCourse> AssignCourses { get; set; }
+        public DbSet<Student> Students { get; set; }
 
 
        

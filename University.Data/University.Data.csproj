@@ -122,6 +122,10 @@
     <Compile Include="Migrations\202111171642466_CourseModelAddUp.Designer.cs">
       <DependentUpon>202111171642466_CourseModelAddUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111180429342_StudentModelAdded.cs" />
+    <Compile Include="Migrations\202111180429342_StudentModelAdded.Designer.cs">
+      <DependentUpon>202111180429342_StudentModelAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UniversityDbContext.cs" />
@@ -190,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111171642466_CourseModelAddUp.resx">
       <DependentUpon>202111171642466_CourseModelAddUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111180429342_StudentModelAdded.resx">
+      <DependentUpon>202111180429342_StudentModelAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
