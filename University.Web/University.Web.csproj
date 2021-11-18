@@ -173,6 +173,7 @@
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -185,6 +186,7 @@
     <Compile Include="ViewModels\AssignCourseViewModel.cs" />
     <Compile Include="ViewModels\CourseViewmodels.cs" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
+    <Compile Include="ViewModels\StudentViewModel.cs" />
     <Compile Include="ViewModels\TeacherViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +255,7 @@
     <Content Include="Views\AssignCourse\Index.cshtml" />
     <Content Include="Views\AssignCourse\CourseStatics.cshtml" />
     <Content Include="Views\AssignCourse\CourseStaticsTable.cshtml" />
+    <Content Include="Views\Student\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

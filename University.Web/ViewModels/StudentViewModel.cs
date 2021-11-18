@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using University.Entities;
 
-namespace University.Entities
+namespace University.Web.ViewModels
 {
-    public class Student:BaseEntities
+    public class StudentRegisterViewModel
     {
         public string Name { get; set; }
 
@@ -34,6 +33,10 @@ namespace University.Entities
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
 
-        public string StudentRegNo { get;set; }
+        public string StudentRegNo { get; set; }
+
+        public List<Department> departmentList { get; set; }
+
+        
     }
 }
