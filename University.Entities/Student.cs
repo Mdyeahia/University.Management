@@ -15,7 +15,7 @@ namespace University.Entities
 
         [Required()]
         [EmailAddress()]
-        [Remote("IsEmailExists", "Student", ErrorMessage = "Email already exists!")]
+        [Remote("IsEmailExists", "Student", HttpMethod = "POST", ErrorMessage = "Email already exists!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 

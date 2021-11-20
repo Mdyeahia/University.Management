@@ -27,13 +27,15 @@ namespace University.Service
         }
 
         #endregion
-        UniversityDbContext context = new UniversityDbContext();
+        
         public bool EmailExist(string email)
         {
+            UniversityDbContext context = new UniversityDbContext();
             return context.Students.Any(e => e.Email == email);
         }
         public string StudentRegNumber(Student student)
         {
+            UniversityDbContext context = new UniversityDbContext();
             var deptName = DepartmentService.Instance.GetDepartbyId(student.DepartmentId);
             var first = deptName.Name;
 
@@ -47,6 +49,7 @@ namespace University.Service
         }
         public int StudentReg(int Id)
         {
+            UniversityDbContext context = new UniversityDbContext();
             var student=context.Students.Find(Id-1).StudentRegNo;
             if (student == null)
             {
@@ -56,6 +59,7 @@ namespace University.Service
         }
         public void SaveRegistration(Student student)
         {
+            UniversityDbContext context = new UniversityDbContext();
             context.Students.Add(student);
             context.SaveChanges();
         }

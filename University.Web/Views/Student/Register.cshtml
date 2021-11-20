@@ -20,8 +20,8 @@
             <div class="form-group">
                 <label class="control-label col-md-2">Email</label>
 
-                <input type="text" name="Email" class="form-control" value="" />
-
+                <input type="text" name="Email" id="EmailField" class="form-control" value="" />
+                <span id="result" />
             </div>
 
             <br />
@@ -52,31 +52,114 @@
             <div class="form-group">
                 <label class="control-label col-md-2">Department</label>
 
-                
-
-                    <select class="form-control" name="DepartmentId" id="DepartmentId">
-
-                        <option value="">Select Department</option>
-                        @foreach (var aDepartment in ViewBag.DepartmentList)
-                        {
-                            <option value="@aDepartment.Id">@aDepartment.Name</option>
-                        }
-
-                    </select><label id="DeptErrorLabel" style="color: red;"></label>
 
 
-                
+                <select class="form-control" name="DepartmentId" id="DepartmentId">
+
+                    <option value="">Select Department</option>
+                    @foreach (var aDepartment in ViewBag.DepartmentList)
+                    {
+                        <option value="@aDepartment.Id">@aDepartment.Name</option>
+                    }
+
+                </select><label id="DeptErrorLabel" style="color: red;"></label>
+
+
+
             </div>
+
             <br />
             <button id="saveBtn" type="button" class="btn btn-primary">Save</button>
-            <button type="reset" class="btn btn-danger">Cancel</button>
+            <button id="restBtn" type="button" class="btn btn-danger">Reset</button>
         </div>
+        <br />
+        <span id="formEmpty" />
     </div>
 
 
 </form>
 <script>
+    function checkEmail() {
+        let temp = null;
+        $.ajax({
+            type: "get",
+            global: false,
+            dataType: 'html',
+            async: false,
+            url: '@Url.Action("IsEmailExists", "Student")',
+            data: { email: $('#EmailField').val() },
+            success: function (data) {
+                
+                temp = data;
+                
+               
+                
+            }
+         });
+        return emailprint(temp)
+    };
+    function emailprint(tata) {
+        if (tata == "False") {
+            
+            $("#result").html("<span style='color:green'>this is an unique email address</span>");
+            $("#EmailField").css('background-color', '');
+            $("#saveBtn").attr("disabled", false);
+           
+            return true;
+
+
+
+        }
+        else {
+            $("#result").html("<span style='color:red'>email already in used!!</span>");
+            $("#EmailField").css('background-color', '#e97878');
+            $("#saveBtn").attr("disabled", true);
+            
+            return false;
+        }
+    };
+
+    function formCheck() {
+            let empty = false;
+            $('.form-control').each(function () {
+                if ($(this).val() == '') {
+                    empty = true;
+
+                }
+
+                
+            });
+
+        return formprint(empty);
+       
+    };
+    function formprint(data) {
+        if (data) {
+            $("#saveBtn").attr('disabled', true);
+            $("#formEmpty").html("<span style='color:red'>Please, Fill up all the boxes to enable save button </span>");
+        
+            return false;
+
+        }
+        else {
+
+            $("#saveBtn").attr('disabled', false);
+            
+            return checkEmail();
+            
+            
+
+
+        }
+    };
+   
+
+
     $("#saveBtn").click(function () {
+        var kom = formCheck();
+
+        if (kom) {
+            console.log("saveBtn if hit");
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("Register", "Student")',
@@ -85,12 +168,37 @@
                 .done(function (response) {
 
                     console.log(response);
+
                     console.warn("Done!!!");
-                    
+
                 })
                 .fail(function (xmlHttpRequest, textStatus, errorThrown) {
                     alert("Fail");
                 });
+        }
+        else
+        {
+            
+            $("#saveBtn").addClass("hidden");
+            $("#restBtn").removeClass("btn-danger");
+            $("#restBtn").addClass("btn-warning");
+            $("#formEmpty").html("<span style='color:red'>Please, Fill up all the boxes to enable save button click </span>");
+        }
 
+    });
+    $("#restBtn").click(function () {
+        $.ajax({
+            type: "Get",
+            url: '@Url.Action("Register", "Student")',
+
+        })
+            .done(function (response) {
+
+                $("#StudentRegistraton").html(response)
+
+            })
+            .fail(function (xmlHttpRequest, textStatus, errorThrown) {
+                alert("Fail");
+            });
     });
 </script>

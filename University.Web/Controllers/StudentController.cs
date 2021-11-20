@@ -25,44 +25,47 @@ namespace University.Web.Controllers
         [HttpPost]
         public ActionResult Register(Student model)
         {
-            
-            var newStudent = new Student();
-
-            newStudent.Name = model.Name;
-            if (IsEmailExists(model.Email)==false)
+            if (ModelState.IsValid)
             {
-            newStudent.Email = model.Email;
-            
-            
-            newStudent.ContactNo = model.ContactNo;
-            if (model.Date != null)
-            { 
-                newStudent.Date = model.Date; 
-            }
-            else
-            {
-                newStudent.Date = DateTime.Now;
-            }
-            
-            newStudent.Address = model.Address;
-            newStudent.DepartmentId = model.DepartmentId;
-            newStudent.StudentRegNo = StudentService.Instance.StudentRegNumber(model);
+                var newStudent = new Student();
 
-            StudentService.Instance.SaveRegistration(newStudent);
+                newStudent.Name = model.Name;
+                if (IsEmailExists(model.Email) == false)
+                {
+                    newStudent.Email = model.Email;
 
-            return RedirectToAction("Index");
+
+                    newStudent.ContactNo = model.ContactNo;
+                    if (model.Date != null)
+                    {
+                        newStudent.Date = model.Date;
+                    }
+                    else
+                    {
+                        newStudent.Date = DateTime.Now;
+                    }
+
+                    newStudent.Address = model.Address;
+                    newStudent.DepartmentId = model.DepartmentId;
+                    newStudent.StudentRegNo = StudentService.Instance.StudentRegNumber(model);
+
+                    StudentService.Instance.SaveRegistration(newStudent);
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("Email", "Email address already exists. Please enter a different email address.");
+                    
+                }
             }
-            else
-            {
-                ViewBag.ErrorMessage = "Email already Used !!";
-                return RedirectToAction("Register");
-            }
+            return View("Register");
         }
         public bool IsEmailExists(string Email)
         {
-            var Isemail = StudentService.Instance.EmailExist(Email);
-            
-            return Isemail;
+
+
+            return StudentService.Instance.EmailExist(Email);
         }
     }
 }
